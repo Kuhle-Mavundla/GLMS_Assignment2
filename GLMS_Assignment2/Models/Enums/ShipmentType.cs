@@ -1,0 +1,1 @@
+namespace GLMS.Web.Models.Enums { public enum ShipmentType { Air, Land, Sea } }
