@@ -1,0 +1,17 @@
+@model ContractSearchViewModel
+@{ ViewData["Title"] = "Search Contracts"; }
+<h2>Search Contracts</h2>
+<form asp-action="Search" method="post" class="card p-3 mb-4 bg-light border-0 shadow-sm">
+    <div class="row">
+        <div class="col-md-3 mb-2"><label class="form-label">Start Date (from)</label><input asp-for="StartDate" type="date" class="form-control" /></div>
+        <div class="col-md-3 mb-2"><label class="form-label">End Date (to)</label><input asp-for="EndDate" type="date" class="form-control" /></div>
+        <div class="col-md-3 mb-2"><label class="form-label">Status</label><select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<ContractStatus>()"><option value="">-- All --</option></select></div>
+        <div class="col-md-3 mb-2 d-flex align-items-end"><button type="submit" class="btn btn-primary w-100">Search</button></div>
+    </div>
+</form>
+@if (Model.Results.Any()) {
+    <h4>Results (@Model.Results.Count)</h4>
+    <table class="table table-hover"><thead class="table-light"><tr><th>ID</th><th>Client</th><th>Start</th><th>End</th><th>Status</th><th>Level</th><th></th></tr></thead><tbody>
+    @foreach (var c in Model.Results) { <tr><td>@c.ContractId</td><td>@c.Client?.Name</td><td>@c.StartDate.ToShortDateString()</td><td>@c.EndDate.ToShortDateString()</td><td><span class="badge @(c.Status == ContractStatus.Active ? "bg-success" : c.Status == ContractStatus.Expired ? "bg-danger" : "bg-secondary")">@c.Status</span></td><td>@c.ServiceLevel</td><td><a asp-action="Details" asp-route-id="@c.ContractId" class="btn btn-sm btn-outline-info">Details</a></td></tr> }
+    </tbody></table>
+} else if (Context.Request.Method == "POST") { <div class="alert alert-info">No contracts match your criteria.</div> }

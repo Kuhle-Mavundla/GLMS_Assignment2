@@ -1,0 +1,25 @@
+@model Contract
+@{ ViewData["Title"] = "Edit Contract"; }
+<h2>Edit Contract</h2>
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ContractId" />
+    <input type="hidden" asp-for="SignedAgreementPath" />
+    <div class="mb-3"><label asp-for="ClientId" class="form-label"></label><select asp-for="ClientId" class="form-select" asp-items="ViewBag.ClientId"></select></div>
+    <div class="row">
+        <div class="col-md-6 mb-3"><label asp-for="StartDate" class="form-label"></label><input asp-for="StartDate" class="form-control" type="date" /><span asp-validation-for="StartDate" class="text-danger"></span></div>
+        <div class="col-md-6 mb-3"><label asp-for="EndDate" class="form-label"></label><input asp-for="EndDate" class="form-control" type="date" /><span asp-validation-for="EndDate" class="text-danger"></span></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3"><label asp-for="Status" class="form-label"></label><select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<ContractStatus>()"></select></div>
+        <div class="col-md-6 mb-3"><label asp-for="ServiceLevel" class="form-label"></label><select asp-for="ServiceLevel" class="form-select" asp-items="Html.GetEnumSelectList<ServiceLevel>()"></select></div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Replace Signed Agreement (PDF only)</label>
+        <input type="file" name="signedAgreement" class="form-control" accept=".pdf" />
+        @if (!string.IsNullOrEmpty(Model.SignedAgreementPath)) { <small class="text-success">Current file: @Model.SignedAgreementPath</small> }
+    </div>
+    <button type="submit" class="btn btn-warning">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

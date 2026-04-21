@@ -1,0 +1,26 @@
+@model IEnumerable<Contract>
+@{ ViewData["Title"] = "Contracts"; }
+<h2>Contracts</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">+ New Contract</a>
+    <a asp-action="Search" class="btn btn-outline-secondary ms-2">Search / Filter</a>
+</p>
+<table class="table table-hover">
+    <thead class="table-light"><tr><th>ID</th><th>Client</th><th>Start</th><th>End</th><th>Status</th><th>Level</th><th>PDF</th><th>Actions</th></tr></thead>
+    <tbody>
+    @foreach (var c in Model) {
+        <tr>
+            <td>@c.ContractId</td><td>@c.Client?.Name</td>
+            <td>@c.StartDate.ToShortDateString()</td><td>@c.EndDate.ToShortDateString()</td>
+            <td><span class="badge @(c.Status == ContractStatus.Active ? "bg-success" : c.Status == ContractStatus.Expired ? "bg-danger" : c.Status == ContractStatus.OnHold ? "bg-warning text-dark" : "bg-secondary")">@c.Status</span></td>
+            <td>@c.ServiceLevel</td>
+            <td>@if (!string.IsNullOrEmpty(c.SignedAgreementPath)) { <a asp-action="Download" asp-route-id="@c.ContractId" class="btn btn-sm btn-outline-primary">Download</a> } else { <span class="text-muted">None</span> }</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@c.ContractId" class="btn btn-sm btn-outline-info">Details</a>
+                <a asp-action="Edit" asp-route-id="@c.ContractId" class="btn btn-sm btn-outline-warning">Edit</a>
+                <a asp-action="Delete" asp-route-id="@c.ContractId" class="btn btn-sm btn-outline-danger">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

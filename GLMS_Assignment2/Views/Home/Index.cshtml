@@ -1,8 +1,43 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@{ ViewData["Title"] = "Dashboard"; }
+<div class="text-center py-5">
+    <h1 class="display-5 fw-bold" style="color: #1a1a2e;">Global Logistics Management System</h1>
+    <p class="lead text-muted">TechMove - Hlosokuhle Mavundla ST10454988</p>
+    <hr />
+    <div class="row mt-4 g-4">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-3" style="font-size: 2rem; color: #0d6efd;">&#9679;</div>
+                    <h5 class="card-title">Clients</h5>
+                    <p class="card-text text-muted">Manage logistics clients and their regional information.</p>
+                    <a asp-controller="Clients" asp-action="Index" class="btn btn-primary">View Clients</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-3" style="font-size: 2rem; color: #198754;">&#9679;</div>
+                    <h5 class="card-title">Contracts</h5>
+                    <p class="card-text text-muted">Create and manage logistics contracts with PDF agreements.</p>
+                    <a asp-controller="Contracts" asp-action="Index" class="btn btn-success">View Contracts</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-3" style="font-size: 2rem; color: #ffc107;">&#9679;</div>
+                    <h5 class="card-title">Service Requests</h5>
+                    <p class="card-text text-muted">Raise service requests with live USD to ZAR conversion.</p>
+                    <a asp-controller="ServiceRequests" asp-action="Index" class="btn btn-warning text-dark">View Requests</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4">
+        <a asp-controller="Shipments" asp-action="Demo" class="btn btn-outline-dark btn-lg">
+            Design Pattern Demo (Factory + Strategy + Observer)
+        </a>
+    </div>
 </div>

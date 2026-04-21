@@ -1,0 +1,26 @@
+@model IEnumerable<ServiceRequest>
+@{ ViewData["Title"] = "Service Requests"; }
+<h2>Service Requests</h2>
+<p><a asp-action="Create" class="btn btn-primary">+ New Service Request</a></p>
+<table class="table table-striped">
+    <thead><tr><th>ID</th><th>Contract</th><th>Client</th><th>Description</th><th>USD</th><th>ZAR</th><th>Rate</th><th>Status</th><th>Date</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var sr in Model) {
+        <tr>
+            <td>@sr.ServiceRequestId</td>
+            <td>#@sr.ContractId</td>
+            <td>@sr.Contract?.Client?.Name</td>
+            <td>@sr.Description</td>
+            <td>@sr.CostUSD.ToString("C")</td>
+            <td>R @sr.CostZAR.ToString("N2")</td>
+            <td>@sr.ExchangeRateUsed.ToString("N4")</td>
+            <td><span class="badge bg-info">@sr.Status</span></td>
+            <td>@sr.CreatedDate.ToShortDateString()</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@sr.ServiceRequestId" class="btn btn-sm btn-info">Details</a>
+                <a asp-action="Delete" asp-route-id="@sr.ServiceRequestId" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

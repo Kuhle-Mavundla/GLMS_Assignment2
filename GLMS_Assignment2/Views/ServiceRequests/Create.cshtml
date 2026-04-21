@@ -1,0 +1,70 @@
+@model ServiceRequestCreateViewModel
+@{ ViewData["Title"] = "New Service Request"; }
+<h2>Create Service Request</h2>
+
+@if (ViewBag.CurrencyError != null) {
+    <div class="alert alert-warning">@ViewBag.CurrencyError</div>
+}
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    @if (!string.IsNullOrEmpty(Model.ContractTitle)) {
+        <div class="alert alert-info">Creating request for: <strong>@Model.ContractTitle</strong></div>
+        <input type="hidden" asp-for="ContractId" />
+    } else {
+        <div class="mb-3">
+            <label asp-for="ContractId" class="form-label">Contract</label>
+            <select asp-for="ContractId" class="form-select" asp-items="ViewBag.ContractId">
+                <option value="">-- Select Contract --</option>
+            </select>
+            <span asp-validation-for="ContractId" class="text-danger"></span>
+            <small class="text-muted">Only Draft and Active contracts are shown. Expired and On Hold contracts are blocked.</small>
+        </div>
+    }
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label asp-for="CostUSD" class="form-label">Cost (USD)</label>
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input asp-for="CostUSD" class="form-control" type="number" step="0.01" min="0.01" id="costUsd" />
+            </div>
+            <span asp-validation-for="CostUSD" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Current Rate (USD to ZAR)</label>
+            <input type="text" class="form-control" value="@(Model.CurrentRate?.ToString("N4") ?? "Unavailable")" readonly id="rateDisplay" />
+            <input type="hidden" id="rateValue" value="@(Model.CurrentRate?.ToString() ?? "0")" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Estimated Cost (ZAR)</label>
+            <div class="input-group">
+                <span class="input-group-text">R</span>
+                <input type="text" class="form-control" id="zarEstimate" readonly />
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Create Service Request</button>
+    <a asp-controller="ServiceRequests" asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Auto-calculate ZAR cost as the user types the USD amount
+        document.getElementById('costUsd')?.addEventListener('input', function() {
+            var usd = parseFloat(this.value) || 0;
+            var rate = parseFloat(document.getElementById('rateValue').value) || 0;
+            var zar = (usd * rate).toFixed(2);
+            document.getElementById('zarEstimate').value = zar;
+        });
+    </script>
+}
