@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37012.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GLMS_Assignment2", "GLMS_Assignment2\GLMS_Assignment2.csproj", "{A01B7F42-DF67-45B2-A99D-E9BC900ED6F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A01B7F42-DF67-45B2-A99D-E9BC900ED6F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A01B7F42-DF67-45B2-A99D-E9BC900ED6F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A01B7F42-DF67-45B2-A99D-E9BC900ED6F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A01B7F42-DF67-45B2-A99D-E9BC900ED6F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FCB3F7A4-FCF0-433F-994D-A99655C29D97}
+	EndGlobalSection
+EndGlobal
