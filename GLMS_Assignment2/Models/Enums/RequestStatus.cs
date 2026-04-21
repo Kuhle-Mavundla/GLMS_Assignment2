@@ -1,1 +1,1 @@
-namespace GLMS.Web.Models.Enums { public enum RequestStatus { Pending, InProgress, Completed, Cancelled } }
+namespace GLMS_Assignment2.Models.Enums { public enum RequestStatus { Pending, InProgress, Completed, Cancelled } }

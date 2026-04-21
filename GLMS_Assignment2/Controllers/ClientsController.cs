@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GLMS.Web.Data;
-using GLMS.Web.Models;
+using GLMS_Assignment2.Data;
+using GLMS_Assignment2.Models;
 
-namespace GLMS.Web.Controllers
+namespace GLMS_Assignment2.Controllers
 {
     public class ClientsController : Controller
     {

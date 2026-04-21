@@ -1,7 +1,7 @@
-using GLMS.Web.Patterns.Strategy;
-using GLMS.Web.Patterns.Observer;
+using GLMS_Assignment2.Patterns.Strategy;
+using GLMS_Assignment2.Patterns.Observer;
 
-namespace GLMS.Web.Patterns.Factory
+namespace GLMS_Assignment2.Patterns.Factory
 {
     // This is the base class for all shipment types (Air, Land, Sea).
     // It is abstract, meaning you cannot create a Shipment directly —

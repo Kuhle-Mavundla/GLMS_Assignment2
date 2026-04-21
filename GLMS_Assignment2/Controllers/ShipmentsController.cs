@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using GLMS.Web.Models.Enums;
-using GLMS.Web.Patterns.Factory;
-using GLMS.Web.Patterns.Strategy;
-using GLMS.Web.Patterns.Observer;
-using GLMS.Web.ViewModels;
+using GLMS_Assignment2.Models.Enums;
+using GLMS_Assignment2.Patterns.Factory;
+using GLMS_Assignment2.Patterns.Strategy;
+using GLMS_Assignment2.Patterns.Observer;
+using GLMS_Assignment2.ViewModels;
 
-namespace GLMS.Web.Controllers
+namespace GLMS_Assignment2.Controllers
 {
     /// <summary>
     /// Demonstrates all three GoF design patterns integrated into the MVC app.

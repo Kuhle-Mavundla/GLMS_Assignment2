@@ -1,8 +1,8 @@
-using GLMS.Web.Models;
-using GLMS.Web.Models.Enums;
-using GLMS.Web.Services.Interfaces;
+using GLMS_Assignment2.Models;
+using GLMS_Assignment2.Models.Enums;
+using GLMS_Assignment2.Services.Interfaces;
 
-namespace GLMS.Web.Services
+namespace GLMS_Assignment2.Services
 {
     // This service contains the business validation rules for contracts.
     // Keeping validation separate from controllers makes the code cleaner

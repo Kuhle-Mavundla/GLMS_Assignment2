@@ -1,1 +1,1 @@
-namespace GLMS.Web.Models.Enums { public enum ContractStatus { Draft, Active, Expired, OnHold } }
+namespace GLMS_Assignment2.Models.Enums { public enum ContractStatus { Draft, Active, Expired, OnHold } }

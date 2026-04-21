@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GLMS.Web.ViewModels
+namespace GLMS_Assignment2.ViewModels
 {
     // ViewModel for the service request creation form.
     // Contains both the form fields and the currency conversion display values.

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using GLMS.Web.Models.Enums;
-namespace GLMS.Web.Models
+using GLMS_Assignment2.Models.Enums;
+namespace GLMS_Assignment2.Models
 {
     public class ServiceRequest
     {

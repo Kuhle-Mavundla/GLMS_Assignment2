@@ -1,7 +1,7 @@
-using GLMS.Web.Services.Interfaces;
+using GLMS_Assignment2.Services.Interfaces;
 using Newtonsoft.Json.Linq;
 
-namespace GLMS.Web.Services
+namespace GLMS_Assignment2.Services
 {
     // This service connects to the ExchangeRate-API to get live USD to ZAR rates.
     // It uses HttpClient (injected via Dependency Injection) to make the API call.

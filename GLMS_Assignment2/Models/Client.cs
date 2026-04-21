@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-namespace GLMS.Web.Models
+namespace GLMS_Assignment2.Models
 {
     public class Client
     {

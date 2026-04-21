@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using GLMS.Web.Models;
-namespace GLMS.Web.Data
+using GLMS_Assignment2.Models;
+namespace GLMS_Assignment2.Data
 {
     public class AppDbContext : DbContext
     {

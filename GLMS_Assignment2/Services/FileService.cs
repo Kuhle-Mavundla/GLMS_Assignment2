@@ -1,6 +1,6 @@
-using GLMS.Web.Services.Interfaces;
+using GLMS_Assignment2.Services.Interfaces;
 
-namespace GLMS.Web.Services
+namespace GLMS_Assignment2.Services
 {
     // This service handles PDF file uploads.
     // It validates that only .pdf files are accepted, saves them with unique names,

@@ -1,6 +1,6 @@
-using GLMS.Web.Models.Enums;
+using GLMS_Assignment2.Models.Enums;
 
-namespace GLMS.Web.ViewModels
+namespace GLMS_Assignment2.ViewModels
 {
     // ViewModel for the design pattern demo page.
     // Shows how Factory, Strategy, and Observer patterns work together.

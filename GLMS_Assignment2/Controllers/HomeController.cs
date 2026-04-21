@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-namespace GLMS.Web.Controllers
+namespace GLMS_Assignment2.Controllers
 {
     public class HomeController : Controller
     {

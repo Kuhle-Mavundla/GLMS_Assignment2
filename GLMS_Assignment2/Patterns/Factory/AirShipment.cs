@@ -1,4 +1,4 @@
-namespace GLMS.Web.Patterns.Factory
+namespace GLMS_Assignment2.Patterns.Factory
 {
     // Concrete shipment class for air transport.
     // Created by the AirShipmentFactory.

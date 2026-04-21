@@ -1,4 +1,4 @@
-namespace GLMS.Web.Patterns.Strategy
+namespace GLMS_Assignment2.Patterns.Strategy
 {
     // Calculates the cheapest route (saves money, takes longer)
     public class LeastCostRoute : IRoutingStrategy

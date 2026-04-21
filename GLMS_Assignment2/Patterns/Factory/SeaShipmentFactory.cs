@@ -1,4 +1,4 @@
-namespace GLMS.Web.Patterns.Factory
+namespace GLMS_Assignment2.Patterns.Factory
 {
     // Concrete factory that creates SeaShipment objects
     public class SeaShipmentFactory : ShipmentFactory

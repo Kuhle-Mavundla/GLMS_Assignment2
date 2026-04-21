@@ -1,1 +1,1 @@
-namespace GLMS.Web.Models.Enums { public enum ServiceLevel { Standard, Premium, Enterprise } }
+namespace GLMS_Assignment2.Models.Enums { public enum ServiceLevel { Standard, Premium, Enterprise } }

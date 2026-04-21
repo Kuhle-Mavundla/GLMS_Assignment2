@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using GLMS.Web.Data;
-using GLMS.Web.Models;
-using GLMS.Web.Models.Enums;
-using GLMS.Web.Services.Interfaces;
-using GLMS.Web.ViewModels;
+using GLMS_Assignment2.Data;
+using GLMS_Assignment2.Models;
+using GLMS_Assignment2.Models.Enums;
+using GLMS_Assignment2.Services.Interfaces;
+using GLMS_Assignment2.ViewModels;
 
-namespace GLMS.Web.Controllers
+namespace GLMS_Assignment2.Controllers
 {
     public class ServiceRequestsController : Controller
     {

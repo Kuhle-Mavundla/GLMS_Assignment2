@@ -1,4 +1,4 @@
-namespace GLMS.Web.Patterns.Strategy
+namespace GLMS_Assignment2.Patterns.Strategy
 {
     // Calculates the most environmentally friendly route (low carbon footprint)
     public class EcoFriendlyRoute : IRoutingStrategy

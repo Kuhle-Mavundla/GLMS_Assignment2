@@ -1,6 +1,6 @@
-using GLMS.Web.Patterns.Factory;
+using GLMS_Assignment2.Patterns.Factory;
 
-namespace GLMS.Web.Patterns.Observer
+namespace GLMS_Assignment2.Patterns.Observer
 {
     // OBSERVER PATTERN (Gang of Four)
     //

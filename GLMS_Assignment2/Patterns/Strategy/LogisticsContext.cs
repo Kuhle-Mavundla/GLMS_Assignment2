@@ -1,4 +1,4 @@
-namespace GLMS.Web.Patterns.Strategy
+namespace GLMS_Assignment2.Patterns.Strategy
 {
     // The Context class that uses a routing strategy.
     // You can change the strategy at runtime based on the client's needs.

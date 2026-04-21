@@ -1,4 +1,4 @@
-namespace GLMS.Web.Patterns.Strategy
+namespace GLMS_Assignment2.Patterns.Strategy
 {
     // STRATEGY PATTERN (Gang of Four)
     //

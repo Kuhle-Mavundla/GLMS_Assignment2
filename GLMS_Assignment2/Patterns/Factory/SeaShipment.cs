@@ -1,4 +1,4 @@
-namespace GLMS.Web.Patterns.Factory
+namespace GLMS_Assignment2.Patterns.Factory
 {
     // Concrete shipment class for sea transport (cargo ship).
     // Created by the SeaShipmentFactory.
