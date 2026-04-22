@@ -1,0 +1,39 @@
+# This workflow runs the xUnit tests automatically
+# every time code is pushed to GitHub.
+
+name: GLMS Tests
+
+# When to run: on every push and pull request
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    # Run on the latest Ubuntu virtual machine
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Download the code from the repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Install .NET 8 SDK
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # Step 3: Restore NuGet packages
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # Step 4: Build the solution
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      # Step 5: Run all xUnit tests
+      - name: Run tests
+        run: dotnet test --no-build --configuration Release --verbosity normal
