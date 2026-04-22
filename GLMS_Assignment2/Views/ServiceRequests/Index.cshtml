@@ -11,7 +11,7 @@
             <td>#@sr.ContractId</td>
             <td>@sr.Contract?.Client?.Name</td>
             <td>@sr.Description</td>
-            <td>@sr.CostUSD.ToString("C")</td>
+            <td>@sr.CostUSD.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-US"))</td>
             <td>R @sr.CostZAR.ToString("N2")</td>
             <td>@sr.ExchangeRateUsed.ToString("N4")</td>
             <td><span class="badge bg-info">@sr.Status</span></td>
