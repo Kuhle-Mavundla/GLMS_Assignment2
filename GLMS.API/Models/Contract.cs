@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace GLMS.API.Models;
 
+using System.ComponentModel.DataAnnotations;
+
 public class Contract
 {
     public int ContractId { get; set; }

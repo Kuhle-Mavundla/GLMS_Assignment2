@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: glms_db
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - glms_db_data:/var/opt/mssql
+
+  glms_api:
+    build:
+      context: .
+      dockerfile: GLMS.API/Dockerfile
+    container_name: glms_api
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=GLMS_DB;User=sa;Password=Your_password123;TrustServerCertificate=True;MultipleActiveResultSets=true
+      - Jwt__Key=GLMSSuperSecretKey2026ThatIsLongEnough!
+      - Jwt__Issuer=GLMS.API
+      - Jwt__Audience=GLMS_Assignment2
+    ports:
+      - "5001:80"
+
+  glms_web:
+    build:
+      context: .
+      dockerfile: GLMS_Assignment2/Dockerfile
+    container_name: glms_web
+    depends_on:
+      - glms_api
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ApiSettings__BaseUrl=http://glms_api:80
+      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=GLMS_DB;User=sa;Password=Your_password123;TrustServerCertificate=True;MultipleActiveResultSets=true
+    ports:
+      - "5000:80"
+
+volumes:
+  glms_db_data:
+    driver: local
