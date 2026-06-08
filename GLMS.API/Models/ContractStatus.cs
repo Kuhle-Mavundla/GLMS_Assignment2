@@ -1,6 +1,3 @@
-﻿namespace GLMS.API.Models
-{
-    public class ContractStatus
-    {
-    }
-}
+﻿namespace GLMS.API.Models;
+
+public enum ContractStatus { Draft, Active, Expired, OnHold }

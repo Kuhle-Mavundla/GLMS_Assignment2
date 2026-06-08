@@ -1,6 +1,6 @@
-﻿namespace GLMS.API.Services
+﻿namespace GLMS.API.Services;
+public interface ICurrencyService
 {
-    public class ICurrencyService
-    {
-    }
+    Task<decimal> GetUsdToZarRateAsync();
+    decimal ConvertUsdToZar(decimal amount, decimal rate);
 }

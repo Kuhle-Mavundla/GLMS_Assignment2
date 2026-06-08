@@ -1,6 +1,10 @@
-﻿namespace GLMS.API.Repositories
+﻿using GLMS.API.Models;
+namespace GLMS.API.Repositories;
+
+public interface IClientRepository
 {
-    public class IClientRepository
-    {
-    }
+    Task<IEnumerable<Client>> GetAllAsync();
+    Task<Client?> GetByIdAsync(int id);
+    Task<Client> CreateAsync(Client client);
+    Task<bool> DeleteAsync(int id);
 }
