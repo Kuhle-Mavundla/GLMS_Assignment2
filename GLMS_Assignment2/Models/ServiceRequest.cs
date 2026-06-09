@@ -16,6 +16,7 @@ namespace GLMS_Assignment2.Models
         [Column(TypeName = "decimal(18,2)")][Display(Name = "Cost (ZAR)")] public decimal CostZAR { get; set; }
         [Column(TypeName = "decimal(18,6)")][Display(Name = "Exchange Rate Used")] public decimal ExchangeRateUsed { get; set; }
         [Required] public RequestStatus Status { get; set; } = RequestStatus.Pending;
+        [Column("CreatedAt")]
         [DataType(DataType.Date)][Display(Name = "Created Date")] public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }

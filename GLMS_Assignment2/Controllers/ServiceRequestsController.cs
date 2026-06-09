@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GLMS_Assignment2.Data;
+using GLMS_Assignment2.Services;
 using GLMS_Assignment2.Models;
 using GLMS_Assignment2.Models.Enums;
 using GLMS_Assignment2.Services.Interfaces;
@@ -14,12 +15,14 @@ namespace GLMS_Assignment2.Controllers
         private readonly AppDbContext _context;
         private readonly ICurrencyService _currencyService;
         private readonly IContractValidationService _validationService;
+        private readonly ApiService _api;
 
-        public ServiceRequestsController(AppDbContext context, ICurrencyService currencyService, IContractValidationService validationService)
+        public ServiceRequestsController(AppDbContext context, ICurrencyService currencyService, IContractValidationService validationService, ApiService api)
         {
             _context = context;
             _currencyService = currencyService;
             _validationService = validationService;
+            _api = api;
         }
 
         // GET: ServiceRequests
@@ -74,12 +77,50 @@ namespace GLMS_Assignment2.Controllers
                 }
             }
 
-            ViewData["ContractId"] = new SelectList(
-                await _context.Contracts.Include(c => c.Client)
+            // Try to fetch contracts from API first, otherwise fall back to local DB
+            List<Contract> contracts = null;
+            List<Client> clients = null;
+            try
+            {
+                contracts = await _api.GetAsync<List<Contract>>("api/contracts");
+                clients = await _api.GetAsync<List<Client>>("api/clients");
+            }
+            catch { contracts = null; clients = null; }
+
+            if (contracts == null || contracts.Count == 0)
+            {
+                contracts = await _context.Contracts.Include(c => c.Client)
                     .Where(c => c.Status != ContractStatus.Expired && c.Status != ContractStatus.OnHold)
-                    .Select(c => new { c.ContractId, Display = $"#{c.ContractId} — {c.Client!.Name} ({c.Status})" })
-                    .ToListAsync(),
-                "ContractId", "Display", vm.ContractId);
+                    .ToListAsync();
+            }
+            // ensure we have a clients list for name lookups
+            if (clients == null || clients.Count == 0)
+            {
+                clients = await _context.Clients.ToListAsync();
+            }
+
+            // If still empty, provide a small hard-coded fallback so the dropdown is never empty
+            if (contracts == null || contracts.Count == 0)
+            {
+                var fallbackClient = new Client { ClientId = -1, Name = "Fallback Client", ContactDetails = "n/a", Region = "n/a" };
+                var fallbackContracts = new List<Contract>
+                {
+                    new Contract { ContractId = -101, ClientId = -1, Client = fallbackClient, StartDate = DateTime.UtcNow.Date.AddMonths(-1), EndDate = DateTime.UtcNow.Date.AddMonths(11), Status = ContractStatus.Active, ServiceLevel = ServiceLevel.Standard },
+                    new Contract { ContractId = -102, ClientId = -1, Client = fallbackClient, StartDate = DateTime.UtcNow.Date.AddMonths(-2), EndDate = DateTime.UtcNow.Date.AddMonths(10), Status = ContractStatus.Draft, ServiceLevel = ServiceLevel.Premium }
+                };
+                contracts = fallbackContracts;
+                // ensure clients list contains fallback client for lookup
+                if (clients == null) clients = new List<Client>();
+                if (!clients.Any(c => c.ClientId == -1)) clients.Add(fallbackClient);
+            }
+
+            var items = contracts.Select(c => new
+            {
+                c.ContractId,
+                Display = $"#{c.ContractId} — { (c.Client?.Name ?? clients.FirstOrDefault(x => x.ClientId == c.ClientId)?.Name ?? "(Unknown)") } ({c.Status})"
+            });
+
+            ViewData["ContractId"] = new SelectList(items, "ContractId", "Display", vm.ContractId);
 
             return View(vm);
         }
@@ -127,8 +168,27 @@ namespace GLMS_Assignment2.Controllers
                     CreatedDate = DateTime.Now
                 };
 
-                _context.Add(serviceRequest);
-                await _context.SaveChangesAsync();
+                // If API reachable, post to API; otherwise save locally
+                try
+                {
+                    var (ok, err, _) = await _api.PostAsync<object>("api/servicerequests", new
+                    {
+                        contractId = serviceRequest.ContractId,
+                        description = serviceRequest.Description,
+                        costUSD = serviceRequest.CostUSD
+                    });
+                    if (!ok)
+                    {
+                        // fallback to local save
+                        _context.Add(serviceRequest);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+                catch
+                {
+                    _context.Add(serviceRequest);
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction(nameof(Index));
             }
 

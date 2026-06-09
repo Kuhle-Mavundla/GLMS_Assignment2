@@ -81,6 +81,8 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
+    // seed demo data if empty
+    await SeedData.EnsureSeedDataAsync(db);
 }
 
 app.UseSwagger();
